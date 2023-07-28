@@ -10,7 +10,7 @@
 <main>
   <!-- Router and routes -->
   <Router>
-    <Route path="/access-control-modal" component={AccessControlModal} />
+    <Route path="/access-control-modal" component={} />
     <Route path="/" component={Page} />
   </Router>
 </main>

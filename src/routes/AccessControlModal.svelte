@@ -1,25 +1,27 @@
 <!-- AccessControlModal.svelte -->
-
-<script>
-  import { onMount, getContext } from "svelte";
+<script context="module">
+  // Import necessary constants from config/constants.js and utils/defaultColor.js
   import { PRODUCTION_WEBSITE, STAGING_WEBSITE } from "../config/constants.js";
-  import { DEFAULT_COLORS } from "../utils/defaultColor";
+  import { DEFAULT_COLORS } from "../utils/defaultColor.js";
+</script>
+<script>
+ import { onMount, page } from "svelte";
   import { gatekeeperContext } from "../lib/gatekeeperContext.js";
 
-  // ... (rest of the script)
-
-  export let account;
-  export let polygonId;
   export let checksIds;
   export let roles;
   export let checkCallback;
-  export let customization;
+  export let defaultColors;
   export let nftClaimLinks;
-  export let signature;
   export let isStaging;
+  export let account;
+
+  // ... (rest of the script)
+
+
 
   let closeModal = false;
-  const { verified, verify } = getContext(gatekeeperContext);
+   const { verified, verify } = gatekeeperContext;
 
   // Handle iframe message
   const receiveMessage = (event) => {
@@ -45,17 +47,15 @@
 
   // Define the parameters to be passed in the URL
   const params = {
-    bgColor: customization ? customization.backgroundColor : DEFAULT_COLORS.backgroundColor,
-    primaryColor: customization ? customization.primaryColor : DEFAULT_COLORS.primaryColor,
-    textColor: customization ? customization.textColor : DEFAULT_COLORS.textColor,
-    buttonTextColor: customization ? customization.buttonTextColor : DEFAULT_COLORS.buttonTextColor,
+    bgColor: defaultColors ? defaultColors.backgroundColor : DEFAULT_COLORS.backgroundColor,
+    primaryColor: defaultColors ? defaultColors.primaryColor : DEFAULT_COLORS.primaryColor,
+    textColor: defaultColors ? defaultColors.textColor : DEFAULT_COLORS.textColor,
+    buttonTextColor: defaultColors ? defaultColors.buttonTextColor : DEFAULT_COLORS.buttonTextColor,
     isIframe: "true",
-    signature,
     address: account,
     checksIds: checksIds ? checksIds.toString() : undefined,
     roles: roles ? roles.toString() : undefined,
     nftClaimLinks: JSON.stringify(nftClaimLinks || {}),
-    polygonId,
   };
 
   console.log("params:", params);

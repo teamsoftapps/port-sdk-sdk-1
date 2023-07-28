@@ -34,7 +34,7 @@ console.log("module", verified)
           checksIds={[1, 2, 3]}
           roles={['admin', 'user']}
           checkCallback={(msgReceived) => console.log('Received message:', msgReceived)}
-          customization={{ backgroundColor: '#f0f0f0', primaryColor: '#000000' }}
+          defaultColor={{ backgroundColor: '#f0f0f0', primaryColor: '#000000' }}
           nftClaimLinks={{ link1: 'https://example.com/nft1', link2: 'https://example.com/nft2' }}
           signature="user_signature"
           isStaging={true}
